@@ -1,18 +1,25 @@
-import React from "react";
+import React, {useState}from "react";
+import "../styles/App.css";
+import Movie from "./Movie";
+import MoviesList from "./MoviesList";
 
-class Movie extends React.Component {
-  render() {
+const App = () => {
 
-    // If no movie is selected, show message - "Invalid Id".
-    
-    return (
-      <div id="movie-banner">
-        <h2>Movie title</h2>
-        <h2>Movie year</h2>
-        <h2>Movie director</h2>
-      </div>
-    );
+  const [val, setVal] = useState([])
+  function call(val){
+    setVal(val)
   }
-}
+  // console.log(val.length===0)
+  
+  return (
+    <div id="main">
+      <h1>Movie List</h1>
+      <MoviesList function={call}/>
+      {
+        val.length===0 ? <div id="movies-banner">Invalid Id</div>: <Movie Movie_director={val.director} Movie_year={val.year}  Movie_title={val.title}/>
+      }
+    </div>
+  );
+};
 
-export default Movie;
+export default App;
